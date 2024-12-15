@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import LoginView
+
+# We might as well add our login page cause im not making it.
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    next_page = '/'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', CustomLoginView.as_view()),
     path('product/', include('product.urls'))
 ]
